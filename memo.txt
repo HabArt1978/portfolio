@@ -1,0 +1,9 @@
+-----
+
+# Установка pnpm
+
+Выполнить, чтобы включить pnpm: corepack enable
+Удалить node_modules и package-lock.json
+Выполнить: pnpm i
+
+-----

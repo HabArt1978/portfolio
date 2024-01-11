@@ -12,6 +12,8 @@ type TActiveSectionContextProviderProps = {
 type TActiveSectionContext = {
   activeSection: TSectionName;
   setActiveSection: React.Dispatch<React.SetStateAction<TSectionName>>;
+  timeOfLastClick: number;
+  setTimeOfLastClick: React.Dispatch<React.SetStateAction<number>>;
 };
 
 const ActiveSectionContext = createContext<TActiveSectionContext | null>(null);
@@ -20,9 +22,17 @@ export default function ActiveSectionContextProvider({
   children,
 }: TActiveSectionContextProviderProps) {
   const [activeSection, setActiveSection] = useState<TSectionName>("Home");
+  const [timeOfLastClick, setTimeOfLastClick] = useState(0); // нам нужно следить чтобы временно отключить наблюдателя (react-intersection-observer), когда пользователь нажимает на ссылку
 
   return (
-    <ActiveSectionContext.Provider value={{ activeSection, setActiveSection }}>
+    <ActiveSectionContext.Provider
+      value={{
+        activeSection,
+        setActiveSection,
+        timeOfLastClick,
+        setTimeOfLastClick,
+      }}
+    >
       {children}
     </ActiveSectionContext.Provider>
   );

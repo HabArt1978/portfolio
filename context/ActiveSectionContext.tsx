@@ -1,9 +1,7 @@
 "use client";
 
 import React, { createContext, useContext, useState } from "react";
-import { links } from "@/library/data";
-
-type TSectionName = (typeof links)[number]["name"];
+import type { TSectionName } from "@/library/types";
 
 type TActiveSectionContextProviderProps = {
   children: React.ReactNode;

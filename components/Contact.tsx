@@ -41,14 +41,19 @@ export default function Contact() {
       <form
         className="mt-10 flex flex-col dark:text-black"
         action={async (formData) => {
-          const { data, error } = await sendEmail(formData);
-          // !TODO разобраться с отсутствием сообщения об ошибке
-          if (error) {
-            toast.error(error);
-            return;
+          const { error } = await sendEmail(formData);
+          if (!error) {
+            return toast.success("Письмо успешно отправлено!");
           }
 
-          toast.success("Письмо успешно отправлено!");
+          let errorMessage = "Что-то пошло не так.., попробуйте снова.";
+          if (typeof error === "string") {
+            errorMessage = error;
+          } else if (Object.hasOwn(error, "message")) {
+            errorMessage = error.message;
+          }
+
+          toast.error(errorMessage);
         }}
       >
         <input
@@ -64,7 +69,7 @@ export default function Contact() {
           placeholder="Your message"
           className="h-52 my-3 rounded-lg borderBlack p-4 dark:bg-white dark:bg-opacity-80 dark:focus:bg-opacity-100 transition-all outline-none"
           required
-          maxLength={500}
+          maxLength={5000}
         />
 
         <SubmitBtn />

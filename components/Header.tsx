@@ -34,9 +34,9 @@ export default function Header() {
                   setActiveSection(link.name), setTimeOfLastClick(Date.now());
                 }}
                 className={clsx(
-                  "flex w-full items-center justify-center px-3 py-3 hover:text-gray-950 transition dark:text-gray-500 dark:hover:text-gray-300 ",
+                  "flex w-full items-center justify-center px-3 py-3 hover:text-gray-950  transition dark:text-gray-500 dark:hover:text-gray-300",
                   {
-                    "text-gray-950 dark:text-[#e5e7eb]":
+                    "text-gray-950 dark:text-white":
                       activeSection === link.name,
                   }
                 )}

@@ -18,16 +18,16 @@ export const sendEmail = async (formData: FormData) => {
     };
   }
 
-  if (!validateString(message, 500)) {
+  if (!validateString(message, 5000)) {
     return {
       error: "Недопустимое сообщение!",
     };
   }
 
-  let data;
+  let response;
 
   try {
-    data = await resend.emails.send({
+    response = await resend.emails.send({
       // !TODO генерация ошибки .dev => .com
       from: "Contact Form <onboarding@resend.dev>",
       to: "habart1978@gmail.com",
@@ -38,13 +38,12 @@ export const sendEmail = async (formData: FormData) => {
         senderEmail: senderEmail as string,
       }),
     });
-  } catch (err: unknown) {
+  } catch (error: unknown) {
     return {
-      error: getErrorMessage(err),
+      data: undefined,
+      error: getErrorMessage(error),
     };
   }
 
-  return {
-    data,
-  };
+  return response;
 };
